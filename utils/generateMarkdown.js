@@ -41,7 +41,7 @@
 //
 // Use the acceptance criteria and the professional README guide as a reference.
 
-function generateMarkdown(data) {
+export function generateMarkdown(data) {
   // TODO: Use template literals to build the README.md content.
   // Hint: You can call your license helper functions here.
 
@@ -59,4 +59,4 @@ ${data.description}
 }
 
 // TODO: Export the generateMarkdown function so index.js can use it.
-module.exports = generateMarkdown;
+// module.exports = generateMarkdown;
