@@ -45,45 +45,61 @@ const questions = [
   {
     type: "input",
     name: "title",
-    message: "project title: "
+    message: "project title: ",
   },
   {
     type: "input",
     name: "description",
-    message: "project description: "
-  },
-  {
-    type: "choice",
-    name: "license",
-    message: "license: "
+    message: "project description: ",
   },
   {
     title: "input",
     name: "installCommand",
-    message: "installation command: "
+    message: "installation command: ",
+  },
+  {
+    type: "checkbox",
+    name: "license",
+    message: "license(s) - navigate with down arrow, select with spacebar: ",
+    choices: [
+      "None",
+      "Apache 2.0",
+      "Boost 1.0",
+      "BSD 3-Clause License",
+      "CCO",
+      "GNU GPL v3",
+      "MIT License",
+      "Mozilla Public License 2.0",
+      "Open Database License (ODbl)",
+      "Unlicense",
+    ],
   },
   {
     title: "input",
     name: "testCommand",
-    message: "test command: "
+    message: "test command: ",
   },
   {
     title: "input",
     name: "usageInfo",
-    message: "usage information: "
+    message: "usage information: ",
   },
   {
     title: "input",
     name: "contributionGuide",
-    message: "contribution guidelines: "
-  }
+    message: "contribution guidelines: ",
+  },
 ];
 
+let md = "";
 inquirer
   .prompt(questions)
   .then((data) => {
-    const name = data.name;
-    console.log("Data is: ", data);
+    // const name = data.name;
+    // console.log("Data is: ", data);
+    md = generateMarkdown(data);
+    // console.log(md);
+    writeToFile("README.md", md);
   })
   .catch((err) => console.error("Something bad happened: ", err));
 
@@ -92,6 +108,13 @@ inquirer
 // Use fs.writeFile or fs.writeFileSync inside this function.
 
 function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) => {
+    if (err) {
+      console.error("Error writing fiile", err);
+      return;
+    }
+    console.log("File written: WorkingREADME.md (conents overwritten)");
+  });
   // TODO: Implement this function so it writes "data" to "fileName"
 }
 
